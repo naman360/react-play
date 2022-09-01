@@ -17,17 +17,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    if(serviceRef.current) return;
     startService();
   }, []);
 
   const clickHandler = async () => {
     if (!serviceRef.current) return;
     const result = await esbuild.build({
-      entryPoints:['index.js'],
-      bundle:true,
-      write:false,
-      plugins:[unpkgPathPlugin()]
+      entryPoints: ["index.js"],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin()],
+      define: {
+        "process.env.NODE_ENV": '"production"',
+        global: "window",
+      },
     });
     console.log(result.outputFiles[0].text);
   };
