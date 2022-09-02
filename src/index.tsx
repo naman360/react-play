@@ -1,12 +1,14 @@
 import { createRoot } from "react-dom/client";
 import * as esbuild from "esbuild-wasm";
-import { useEffect, useRef } from "react";
-import { unpkgPathPlugin } from "./plugins/unpkgPathPlugin";
+import { useEffect, useRef, useState } from "react";
+import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
+import { fetchPlugin } from "./plugins/fetch-plugin";
 const container = document.getElementById("root");
 const root = createRoot(container!);
 
 const App = () => {
   const serviceRef = useRef<Boolean>(false);
+  const [inputCode, setInputCode] = useState("");
   const startService = async () => {
     await esbuild.initialize({
       worker: true,
@@ -26,7 +28,7 @@ const App = () => {
       entryPoints: ["index.js"],
       bundle: true,
       write: false,
-      plugins: [unpkgPathPlugin()],
+      plugins: [unpkgPathPlugin(), fetchPlugin(inputCode)],
       define: {
         // "process.env.NODE_ENV": '"production"',
         global: "window",
@@ -37,7 +39,7 @@ const App = () => {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <textarea onChange={(e) => setInputCode(e.target.value)}></textarea>
       <button onClick={clickHandler}>Click me</button>
     </>
   );
