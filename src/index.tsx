@@ -7,8 +7,9 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 
 const App = () => {
-  const serviceRef = useRef<Boolean>(false);
-  const [inputCode, setInputCode] = useState("");
+  const serviceRef = useRef<boolean>(false);
+  const [inputCode, setInputCode] = useState<string>("");
+  const [bundledOutput, setBundledOutput] = useState<string>("");
   const startService = async () => {
     await esbuild.initialize({
       worker: true,
@@ -34,13 +35,15 @@ const App = () => {
         global: "window",
       },
     });
-    console.log(result.outputFiles[0].text);
+    // console.log(result.outputFiles[0].text);
+    setBundledOutput(result.outputFiles[0].text);
   };
 
   return (
     <>
       <textarea onChange={(e) => setInputCode(e.target.value)}></textarea>
       <button onClick={clickHandler}>Click me</button>
+      <pre>{bundledOutput}</pre>
     </>
   );
 };
