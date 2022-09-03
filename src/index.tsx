@@ -30,6 +30,10 @@ const App = () => {
       entryPoints: ["index.js"],
       bundle: true,
       write: false,
+      minify: true,
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
       plugins: [unpkgPathPlugin(), fetchPlugin(inputCode)],
       define: {
         global: "window",
