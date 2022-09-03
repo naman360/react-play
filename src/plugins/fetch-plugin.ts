@@ -32,7 +32,7 @@ export const fetchPlugin = (input: string) => {
 
         const contents = `
           const style = document.createElement('style');
-          styles.innerText= '${escaped}';
+          style.innerText= '${escaped}';
           document.head.appendChild(style);
           `;
 
