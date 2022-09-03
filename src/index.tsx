@@ -8,6 +8,7 @@ const root = createRoot(container!);
 
 const App = () => {
   const serviceRef = useRef<boolean>(false);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [inputCode, setInputCode] = useState<string>("");
   const [bundledOutput, setBundledOutput] = useState<string>("");
   const startService = async () => {
@@ -31,19 +32,37 @@ const App = () => {
       write: false,
       plugins: [unpkgPathPlugin(), fetchPlugin(inputCode)],
       define: {
-        // "process.env.NODE_ENV": '"production"',
         global: "window",
       },
     });
-    // console.log(result.outputFiles[0].text);
+
     setBundledOutput(result.outputFiles[0].text);
+    iframeRef.current?.contentWindow?.postMessage(
+      result.outputFiles[0].text,
+      "*"
+    );
   };
+
+  let html = `
+  <html>
+    <head></head>
+    <body>
+      <div id="root"></div>
+      <script>
+        window.addEventListener('message', (event) => {
+          eval(event.data);
+        },false);
+      </script>
+    </body>
+  </html>
+`;
 
   return (
     <>
       <textarea onChange={(e) => setInputCode(e.target.value)}></textarea>
       <button onClick={clickHandler}>Click me</button>
       <pre>{bundledOutput}</pre>
+      <iframe ref={iframeRef} srcDoc={html} sandbox="allow-scripts"></iframe>
     </>
   );
 };
