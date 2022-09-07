@@ -3,13 +3,14 @@ import * as esbuild from "esbuild-wasm";
 import { useEffect, useRef, useState } from "react";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
+import { CodeEditor } from "./components/CodeEditor";
 const container = document.getElementById("root");
 const root = createRoot(container!);
 
 const App = () => {
   const serviceRef = useRef<boolean>(false);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const [inputCode, setInputCode] = useState<string>("");
+  const [inputCode, setInputCode] = useState<string | undefined>("");
   const [bundledOutput, setBundledOutput] = useState<string>("");
   const startService = async () => {
     await esbuild.initialize({
@@ -63,6 +64,7 @@ const App = () => {
 
   return (
     <>
+      <CodeEditor initialValue="" onChange={setInputCode} />
       <textarea onChange={(e) => setInputCode(e.target.value)}></textarea>
       <button onClick={clickHandler}>Click me</button>
       <pre>{bundledOutput}</pre>
