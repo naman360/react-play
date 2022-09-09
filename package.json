@@ -13,10 +13,12 @@
     "axios": "^0.27.2",
     "esbuild-wasm": "^0.15.5",
     "localforage": "^1.10.0",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/prettier": "^2.7.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
