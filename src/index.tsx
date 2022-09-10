@@ -1,9 +1,11 @@
+import "bulmaswatch/superhero/bulmaswatch.min.css";
 import { createRoot } from "react-dom/client";
 import * as esbuild from "esbuild-wasm";
 import { useEffect, useRef, useState } from "react";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 import { CodeEditor } from "./components/CodeEditor";
+import { Preview } from "./components/Preview";
 const container = document.getElementById("root");
 const root = createRoot(container!);
 
@@ -42,10 +44,6 @@ const App = () => {
     });
 
     setBundledOutput(result.outputFiles[0].text);
-    iframeRef.current?.contentWindow?.postMessage(
-      result.outputFiles[0].text,
-      "*"
-    );
   };
 
   let html = `
@@ -68,7 +66,7 @@ const App = () => {
       <textarea onChange={(e) => setInputCode(e.target.value)}></textarea>
       <button onClick={clickHandler}>Click me</button>
       <pre>{bundledOutput}</pre>
-      <iframe ref={iframeRef} srcDoc={html} sandbox="allow-scripts"></iframe>
+      <Preview code={bundledOutput} />
     </>
   );
 };
