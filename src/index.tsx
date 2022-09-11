@@ -7,24 +7,15 @@ import { fetchPlugin } from "./plugins/fetch-plugin";
 import { CodeEditor } from "./components/CodeEditor";
 import { Preview } from "./components/Preview";
 import bundle from "./bundler";
+import { CodeCell } from "./components/CodeCell";
 const container = document.getElementById("root");
 const root = createRoot(container!);
 
 const App = () => {
-  const [inputCode, setInputCode] = useState<string | undefined>("");
-  const [bundledOutput, setBundledOutput] = useState<string>("");
-
-  const clickHandler = async () => {
-    const output = await bundle(inputCode);
-    setBundledOutput(output);
-  };
-
   return (
-    <>
-      <CodeEditor initialValue="" onChange={setInputCode} />
-      <button onClick={clickHandler}>Click me</button>
-      <Preview code={bundledOutput} />
-    </>
+    <div>
+      <CodeCell />
+    </div>
   );
 };
 
