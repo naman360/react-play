@@ -26,5 +26,12 @@ export const Preview: React.FC<PreviewProps> = ({ code }) => {
     iframeRef.current.contentWindow?.postMessage(code, "*");
   }, [code]);
 
-  return <iframe ref={iframeRef} srcDoc={html} sandbox="allow-scripts" />;
+  return (
+    <iframe
+      title="preview-code"
+      ref={iframeRef}
+      srcDoc={html}
+      sandbox="allow-scripts"
+    />
+  );
 };
