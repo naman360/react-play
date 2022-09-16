@@ -11,6 +11,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.4.5",
     "@types/react-resizable": "^3.0.3",
+    "@uiw/react-md-editor": "^3.18.1",
     "axios": "^0.27.2",
     "bulmaswatch": "^0.8.1",
     "esbuild-wasm": "^0.15.5",
