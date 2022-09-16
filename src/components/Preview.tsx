@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import "./preview.css";
 interface PreviewProps {
   code: string;
+  err: string;
 }
 
 let html = `
@@ -10,15 +11,29 @@ let html = `
   <body>
     <div id="root"></div>
     <script>
+    const handleError=(err)=>{
+      const root=document.getElementById('root');
+      root.innerHTML='<div style="color:red;">'+err+'</div>'
+      console.error(err)
+    }
+    window.addEventListener('error', (event) => {
+      event.preventDeafult()
+     handleError(event.error)
+    },false);
+
       window.addEventListener('message', (event) => {
-        eval(event.data);
+        try{
+          eval(event.data);
+        } catch(err){
+          handleError(err)
+        }
       },false);
     </script>
   </body>
 </html>
 `;
 
-export const Preview: React.FC<PreviewProps> = ({ code }) => {
+export const Preview: React.FC<PreviewProps> = ({ code, err }) => {
   const iframeRef = useRef<any>();
 
   useEffect(() => {
@@ -37,6 +52,7 @@ export const Preview: React.FC<PreviewProps> = ({ code }) => {
         srcDoc={html}
         sandbox="allow-scripts"
       />
+      {err && <div className="preview-error">{err}</div>}
     </div>
   );
 };

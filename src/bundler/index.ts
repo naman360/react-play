@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild-wasm";
 
-import { unpkgPathPlugin } from "../plugins/unpkg-path-plugin";
-import { fetchPlugin } from "../plugins/fetch-plugin";
+import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
+import { fetchPlugin } from "./plugins/fetch-plugin";
 
 const bundle = async (rawCode: string | undefined) => {
   try {
@@ -15,19 +15,26 @@ const bundle = async (rawCode: string | undefined) => {
     } else throw err;
   }
 
-  const result = await esbuild.build({
-    entryPoints: ["index.js"],
-    bundle: true,
-    write: false,
-    minify: true,
-    minifyIdentifiers: true,
-    minifySyntax: true,
-    minifyWhitespace: true,
-    plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
-    define: {
-      global: "window",
-    },
-  });
-  return result.outputFiles[0].text;
+  try {
+    const result = await esbuild.build({
+      entryPoints: ["index.js"],
+      bundle: true,
+      write: false,
+      minify: true,
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
+      plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
+      define: {
+        global: "window",
+      },
+    });
+    return { code: result.outputFiles[0].text, error: "" };
+  } catch (error: any) {
+    return {
+      code: "",
+      error: error.message,
+    };
+  }
 };
 export default bundle;
