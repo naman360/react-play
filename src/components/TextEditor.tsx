@@ -6,9 +6,8 @@ export const TextEditor = () => {
   const [value, setValue] = useState<string | undefined>("**Hello world!!!**");
   const [editing, setEditing] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement | null>(null);
-  const { loading, data } = useContext(CellContext);
+
   useEffect(() => {
-    console.log(loading, data);
     const listener = (event: MouseEvent) => {
       if (
         ref.current &&

@@ -1,10 +1,6 @@
-import { Action, Cell, CellState } from "./types";
+import { Cell, CellState } from "./types";
 import { ActionType } from "./actions";
-import { Reducer } from "react";
-export const cellReducer = (
-  state: CellState,
-  action: Action
-): CellState | undefined => {
+export const cellReducer = (state: CellState, action: any): CellState => {
   switch (action.type) {
     case ActionType.UPDATE_CELL:
       const { id, content } = action.payload;
@@ -24,10 +20,11 @@ export const cellReducer = (
         (id: string) => id === action.payload.id
       );
       const targetIndex = direction === "up" ? index - 1 : index + 1;
-      if (targetIndex < 0 || targetIndex > state.order.length - 1) return;
       const modifiedOrder = state.order;
-      modifiedOrder[index] = modifiedOrder[targetIndex];
-      modifiedOrder[targetIndex] = action.payload.id;
+      if (targetIndex > 0 || targetIndex < state.order.length - 1) {
+        modifiedOrder[index] = modifiedOrder[targetIndex];
+        modifiedOrder[targetIndex] = action.payload.id;
+      }
       return {
         ...state,
         order: modifiedOrder,

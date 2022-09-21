@@ -34,6 +34,8 @@ export const ContextWrapper = (props: any) => {
     });
   };
 
+  // Define a type in createcontext to export util methods
+
   const insertCellBefore = (id: string, cellType: CellType) => {
     dispatch({
       type: ActionType.INSERT_CELL_BEFORE,
@@ -52,6 +54,10 @@ export const ContextWrapper = (props: any) => {
   };
 
   return (
-    <CellContext.Provider value={state}>{props.children}</CellContext.Provider>
+    <CellContext.Provider
+      value={{ state, updateCell, moveCell, deleteCell, insertCellBefore }}
+    >
+      {props.children}
+    </CellContext.Provider>
   );
 };

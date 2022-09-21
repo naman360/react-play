@@ -1,15 +1,13 @@
-import { createContext, Dispatch } from "react";
-import { Action, CellState } from "./types";
+import { createContext } from "react";
+import { CellState } from "./types";
+interface ContextType {
+  state: CellState;
+  updateCell: Function;
+  moveCell: Function;
+  insertCellBefore: Function;
+  deleteCell: Function;
+}
 
-const initialState: CellState = {
-  loading: false,
-  error: null,
-  order: [],
-  data: {},
-};
-
-export const updateCell = (id: string, content: string) => {};
-
-const CellContext = createContext(initialState);
+const CellContext = createContext<ContextType>({} as ContextType);
 
 export default CellContext;
