@@ -21,7 +21,7 @@ export const cellReducer = (state: CellState, action: any): CellState => {
       );
       const targetIndex = direction === "up" ? index - 1 : index + 1;
       const modifiedOrder = state.order;
-      if (targetIndex > 0 || targetIndex < state.order.length - 1) {
+      if (targetIndex >= 0 && targetIndex <= state.order.length - 1) {
         modifiedOrder[index] = modifiedOrder[targetIndex];
         modifiedOrder[targetIndex] = action.payload.id;
       }
@@ -31,7 +31,7 @@ export const cellReducer = (state: CellState, action: any): CellState => {
       };
     case ActionType.INSERT_CELL_BEFORE:
       const cell: Cell = {
-        type: action.payload.type,
+        type: action.payload.cellType,
         content: "",
         id: randomId(),
       };
