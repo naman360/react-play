@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import CellContext from "../context";
-import "./add-cell.css";
+import "../css/add-cell.css";
 interface AddCellProps {
   nextCellId: string | null;
   forceVisible?: boolean;

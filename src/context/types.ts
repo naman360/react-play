@@ -1,5 +1,3 @@
-import { ActionType } from "./actions";
-
 export type Direction = "up" | "down";
 export type CellType = "code" | "text";
 export interface Cell {

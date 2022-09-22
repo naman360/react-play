@@ -2,9 +2,7 @@ import React, { useEffect, useRef } from "react";
 import MonacoEditor, { OnChange, OnMount } from "@monaco-editor/react";
 import prettier from "prettier";
 import parser from "prettier/parser-babel";
-import loader from "@monaco-editor/loader";
-
-import "./code-editor.css";
+import "../css/code-editor.css";
 interface CodeEditorProps {
   initialValue: string;
   onChange: (value: string | undefined) => void;

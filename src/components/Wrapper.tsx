@@ -1,4 +1,4 @@
-import { ReactElement, useReducer } from "react";
+import { useReducer } from "react";
 import CellContext from "../context";
 import { ActionType } from "../context/actions";
 import { cellReducer } from "../context/reducers";

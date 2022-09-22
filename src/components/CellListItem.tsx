@@ -3,7 +3,7 @@ import { Cell } from "../context/types";
 import { ActionBar } from "./ActionBar";
 import { CodeCell } from "./CodeCell";
 import { TextEditor } from "./TextEditor";
-import "./cell-list-item.css";
+import "../css/cell-list-item.css";
 interface CellListItemProps {
   cell: Cell;
 }

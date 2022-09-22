@@ -2,7 +2,7 @@ import MDEditor from "@uiw/react-md-editor";
 import { useContext, useEffect, useRef, useState } from "react";
 import CellContext from "../context";
 import { Cell } from "../context/types";
-import "./text-editor.css";
+import "../css/text-editor.css";
 
 interface TextEditorProps {
   cell: Cell;

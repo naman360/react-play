@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import CellContext from "../context";
-import "./action-bar.css";
+import "../css/action-bar.css";
 interface ActionBarProps {
   id: string;
 }
