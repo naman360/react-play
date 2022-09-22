@@ -16,7 +16,6 @@ const App = () => {
     <ContextWrapper>
       <div>
         <CellList />
-        {/* <CodeCell /> */}
       </div>
     </ContextWrapper>
   );
