@@ -14,8 +14,7 @@ React and Javascript playground to run and document code without any of setup.
 
 
 
-<img src="https://user-images.githubusercontent.com/47467468/175771056-bf7fa9a0-801b-4887-80b5-169735923d64.png" height="auto" width="800px"  margin="20px">
-
+![React Play Screenshot](https://user-images.githubusercontent.com/40193621/191809441-37a02884-04d7-4757-a82d-846c278346d0.svg)
 
 ## ⚡ Features
 - 🚀 fast and easy to use
