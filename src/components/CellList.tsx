@@ -1,5 +1,6 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import CellContext from "../context";
+import { AddCell } from "./AddCell";
 import { CellListItem } from "./CellListItem";
 
 export const CellList = () => {
@@ -8,14 +9,18 @@ export const CellList = () => {
   const orderedList = order.map((id) => data[id]);
   console.log(data);
   useEffect(() => {
-    insertCellBefore(null, "text");
+    // insertCellBefore(null, "text");
   }, []);
 
   return (
     <div>
       {orderedList.map((cell) => (
-        <CellListItem key={cell.id} cell={cell} />
+        <Fragment key={cell.id}>
+          <AddCell forceVisible={false} nextCellId={cell.id} />
+          <CellListItem key={cell.id} cell={cell} />
+        </Fragment>
       ))}
+      <AddCell forceVisible={orderedList.length === 0} nextCellId={null} />
     </div>
   );
 };
