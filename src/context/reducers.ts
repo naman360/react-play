@@ -29,7 +29,7 @@ export const cellReducer = (state: CellState, action: any): CellState => {
         ...state,
         order: modifiedOrder,
       };
-    case ActionType.INSERT_CELL_BEFORE:
+    case ActionType.INSERT_CELL_AFTER:
       const cell: Cell = {
         type: action.payload.cellType,
         content: "",
@@ -40,9 +40,9 @@ export const cellReducer = (state: CellState, action: any): CellState => {
       );
       const newCellOrder = state.order;
       if (foundIndex < 0) {
-        newCellOrder.push(cell.id);
+        newCellOrder.unshift(cell.id);
       } else {
-        newCellOrder.splice(foundIndex, 0, cell.id);
+        newCellOrder.splice(foundIndex + 1, 0, cell.id);
       }
       return {
         ...state,

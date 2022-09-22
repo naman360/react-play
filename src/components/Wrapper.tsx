@@ -34,9 +34,9 @@ export const ContextWrapper = (props: any) => {
     });
   };
 
-  const insertCellBefore = (id: string, cellType: CellType) => {
+  const insertCellAfter = (id: string, cellType: CellType) => {
     dispatch({
-      type: ActionType.INSERT_CELL_BEFORE,
+      type: ActionType.INSERT_CELL_AFTER,
       payload: {
         id,
         cellType,
@@ -53,7 +53,7 @@ export const ContextWrapper = (props: any) => {
 
   return (
     <CellContext.Provider
-      value={{ state, updateCell, moveCell, deleteCell, insertCellBefore }}
+      value={{ state, updateCell, moveCell, deleteCell, insertCellAfter }}
     >
       {props.children}
     </CellContext.Provider>

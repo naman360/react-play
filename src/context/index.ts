@@ -4,7 +4,7 @@ interface ContextType {
   state: CellState;
   updateCell: Function;
   moveCell: Function;
-  insertCellBefore: Function;
+  insertCellAfter: Function;
   deleteCell: Function;
 }
 
