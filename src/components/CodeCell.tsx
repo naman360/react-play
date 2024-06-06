@@ -11,7 +11,6 @@ interface CodeCellProps {
 }
 
 export const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const [inputCode, setInputCode] = useState<string | undefined>("");
   const [error, setError] = useState<string>("");
   const [bundledOutput, setBundledOutput] = useState<string>("");
   const { updateCell } = useContext(CellContext);
