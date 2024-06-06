@@ -1,7 +1,6 @@
 import * as esbuild from "esbuild-wasm";
 
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
-import { fetchPlugin } from "./plugins/fetch-plugin";
 
 const bundle = async (rawCode: string | undefined) => {
   try {
@@ -24,7 +23,7 @@ const bundle = async (rawCode: string | undefined) => {
       minifyIdentifiers: true,
       minifySyntax: true,
       minifyWhitespace: true,
-      plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
+      plugins: [unpkgPathPlugin(rawCode)],
       define: {
         global: "window",
       },
